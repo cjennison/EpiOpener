@@ -164,7 +164,9 @@ async function main() {
           success = await downloadFile(url, destPath);
 
           if (success) {
-            console.log(`✓ Downloaded: ${skillName} -> ${filename} (using mapped skill ID: s${mappedSkillId})`);
+            console.log(
+              `✓ Downloaded: ${skillName} -> ${filename} (using mapped skill ID: s${mappedSkillId})`
+            );
             downloaded++;
             await new Promise((resolve) => setTimeout(resolve, 100));
             continue;
@@ -179,12 +181,14 @@ async function main() {
         success = await downloadFile(url, destPath);
 
         if (success) {
-          console.log(`✓ Downloaded: ${skillName} -> ${filename} (using converted skill ID: s${skillId})`);
+          console.log(
+            `✓ Downloaded: ${skillName} -> ${filename} (using converted skill ID: s${skillId})`
+          );
           downloaded++;
           await new Promise((resolve) => setTimeout(resolve, 100));
           continue;
         }
-        
+
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 

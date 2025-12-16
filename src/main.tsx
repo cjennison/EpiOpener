@@ -9,6 +9,9 @@ const theme = createTheme({
   /** Theme customization here */
 });
 
+// Add resizeHandle class to html element for ACT resize functionality
+document.documentElement.classList.add('resizeHandle');
+
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error('Root element not found');

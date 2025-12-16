@@ -1,6 +1,10 @@
 # EpiOpener
 
+[![Built with AI](https://img.shields.io/badge/Built%20with-AI%20Assistance-blueviolet?style=flat-square&logo=openai)](https://github.com/features/copilot)
+
 FFXIV Opener Overlay for ACT - Display class openers with audio feedback and zone-aware adjustments.
+
+> **Note**: This project was developed with AI assistance (GitHub Copilot). All code is reviewed, tested, and maintained by human developers.
 
 ## Quick Start
 
