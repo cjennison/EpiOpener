@@ -33,3 +33,50 @@ https://www.thebalanceffxiv.com/img/jobs/war/warrior-dawntrail-opener-updated-2.
 ## Usage
 
 The application will be hosted via a local web server during development and be hosted on Vercel for production use. Users will add the overlay to ACT by specifying the URL of the hosted overlay in ACT's Custom Overlay settings.
+
+## Development Status
+
+### Milestone 1: Project Foundation & ACT Integration ✅ COMPLETE
+
+**Completed Features:**
+
+- ✅ Vite + React + TypeScript project initialized
+- ✅ ESLint and Prettier configured for code quality
+- ✅ Mantine UI component library integrated
+- ✅ Vitest testing framework configured
+- ✅ OverlayPlugin API integration service created
+- ✅ TypeScript types for all ACT events (ChangePrimaryPlayer, ChangeZone, LogLine, CombatData)
+- ✅ Zustand store for overlay state management
+- ✅ OverlayListener component for event subscription
+- ✅ Dev server running at http://localhost:3000/
+
+**Project Structure:**
+
+```
+src/
+├── main.tsx                    # Application entry point with Mantine provider
+├── App.tsx                     # Root component displaying ACT integration status
+├── features/
+│   └── act/
+│       ├── components/
+│       │   └── OverlayListener.tsx    # Event subscription component
+│       └── services/
+│           └── overlayPlugin.service.ts  # ACT API wrapper
+├── stores/
+│   └── overlayStore.ts         # Zustand state management
+└── types/
+    └── overlay.types.ts        # TypeScript definitions for ACT events
+```
+
+**How to Test in ACT:**
+
+1. Run `npm run dev` to start the dev server
+2. In ACT, go to Plugins > OverlayPlugin.dll > New
+3. Select "Custom" overlay type
+4. Set URL to: `http://localhost:3000/`
+5. The overlay will display player name, job, zone, and combat status
+6. Check the browser console (F12 in overlay) to see event logs
+
+**Next Steps:**
+
+- Milestone 2: Opener Data Model & Action Detection
