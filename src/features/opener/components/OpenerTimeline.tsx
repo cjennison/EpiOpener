@@ -36,8 +36,24 @@ export function OpenerTimeline() {
             const isFirstOfPosition =
               index === 0 || currentOpener.actions[index - 1]?.position !== action.position;
 
+            // Check if this is the first non-prepull action (to show PULL marker)
+            const previousAction = index > 0 ? currentOpener.actions[index - 1] : null;
+            const isFirstAfterPrePull =
+              previousAction &&
+              previousAction.delayMs &&
+              previousAction.delayMs < 0 &&
+              (!action.delayMs || action.delayMs >= 0);
+
             return (
               <div key={action.id} className={`action-slot ${isGCD ? 'gcd' : 'ogcd'}`}>
+                {/* PULL marker - show on first action after pre-pull */}
+                {isFirstAfterPrePull && (
+                  <div className="pull-marker">
+                    <div className="pull-line" />
+                    <div className="pull-label">Pull</div>
+                  </div>
+                )}
+
                 {/* Pre-pull marker */}
                 {isPrePull && (
                   <div className="prepull-marker">
