@@ -2,7 +2,8 @@ import { useOverlayStore } from './stores/overlayStore';
 import { OverlayListener } from './features/act/components/OverlayListener';
 
 export function App() {
-  const { playerName, playerJob, currentZone, inCombat } = useOverlayStore();
+  const { playerName, playerJob, currentZone, inCombat, currentOpener, openerProgress } =
+    useOverlayStore();
 
   return (
     <div
@@ -31,6 +32,34 @@ export function App() {
           Combat: <strong>{inCombat ? 'YES' : 'NO'}</strong>
         </p>
       </div>
+
+      {currentOpener && (
+        <div
+          style={{
+            marginTop: '20px',
+            borderTop: '1px solid rgba(255,255,255,0.2)',
+            paddingTop: '20px',
+          }}
+        >
+          <h2 style={{ margin: '0 0 12px 0', fontSize: '18px', fontWeight: 600 }}>
+            Current Opener: {currentOpener.name}
+          </h2>
+          {openerProgress && (
+            <div>
+              <p style={{ margin: '0 0 8px 0' }}>
+                Progress: {openerProgress.completedActions.length} / {currentOpener.actions.length}
+              </p>
+              {openerProgress.isComplete ? (
+                <p style={{ margin: 0, color: '#4ade80', fontWeight: 600 }}>✓ Opener Complete!</p>
+              ) : (
+                <p style={{ margin: 0, fontSize: '14px', opacity: 0.8 }}>
+                  Next: {currentOpener.actions[openerProgress.currentIndex]?.name || 'N/A'}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

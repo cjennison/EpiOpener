@@ -10,6 +10,9 @@ coverage/
 dist/
 build/
 
+# Downloaded assets (can be regenerated)
+public/icons/*.png
+
 # Misc
 .DS_Store
 *.pem

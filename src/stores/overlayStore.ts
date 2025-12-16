@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { Opener, OpenerProgress } from '@/types/opener.types';
 
 interface OverlayState {
   // Player state
@@ -14,11 +15,17 @@ interface OverlayState {
   inCombat: boolean;
   encounterTitle: string | null;
 
+  // Opener state
+  currentOpener: Opener | null;
+  openerProgress: OpenerProgress | null;
+
   // Actions
   setPlayer: (charId: string, charName: string) => void;
   setPlayerJob: (job: string) => void;
   setZone: (zoneId: number, zoneName?: string) => void;
   setCombatState: (active: boolean, encounterTitle?: string) => void;
+  setCurrentOpener: (opener: Opener | null) => void;
+  setOpenerProgress: (progress: OpenerProgress | null) => void;
   logAction: (actionName: string, actionId: string) => void;
   reset: () => void;
 }
@@ -31,6 +38,8 @@ const initialState = {
   currentZoneId: null,
   inCombat: false,
   encounterTitle: null,
+  currentOpener: null,
+  openerProgress: null,
 };
 
 export const useOverlayStore = create<OverlayState>((set) => ({
@@ -50,10 +59,18 @@ export const useOverlayStore = create<OverlayState>((set) => ({
     console.log(`[Store] Zone changed: ${zoneName || 'Unknown'} (${zoneId})`);
     set({ currentZoneId: zoneId, currentZone: zoneName || `Zone ${zoneId}` });
   },
-
   setCombatState: (active, encounterTitle) => {
     console.log(`[Store] Combat ${active ? 'started' : 'ended'}`, encounterTitle || '');
     set({ inCombat: active, encounterTitle: encounterTitle || null });
+  },
+
+  setCurrentOpener: (opener) => {
+    console.log(`[Store] Opener changed:`, opener?.name || 'None');
+    set({ currentOpener: opener });
+  },
+
+  setOpenerProgress: (progress) => {
+    set({ openerProgress: progress });
   },
 
   logAction: (actionName, actionId) => {

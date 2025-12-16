@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { overlayPluginService } from '../services/overlayPlugin.service';
 import { useOverlayStore } from '@/stores/overlayStore';
 import { getJobName } from '@/lib/jobs';
+import { actionDetectionService } from '@/features/opener/services/actionDetection.service';
+import { openerService } from '@/features/opener/services/opener.service';
 import type {
   ChangePrimaryPlayerEvent,
   ChangeZoneEvent,
@@ -16,24 +18,38 @@ import type {
  * This component doesn't render anything - it only manages event subscriptions.
  */
 export function OverlayListener() {
-  const { setPlayer, setPlayerJob, setZone, setCombatState, logAction } = useOverlayStore();
+  const {
+    setPlayer,
+    setPlayerJob,
+    setZone,
+    setCombatState,
+    setCurrentOpener,
+    setOpenerProgress,
+    logAction,
+  } = useOverlayStore();
 
   useEffect(() => {
     console.log('[OverlayListener] Initializing ACT event listeners...');
 
-    // Fetch current player's combatant data to get job info
+    // Function to fetch player job info from getCombatants
     const fetchPlayerJob = async () => {
       const result = await overlayPluginService.callHandler<GetCombatantsResponse>({
         call: 'getCombatants',
       });
-
-      if (result?.combatants && result.combatants.length > 0) {
-        // First combatant is usually the player
+      if (result && result.combatants && result.combatants.length > 0) {
         const player = result.combatants[0];
         if (player) {
           const jobName = getJobName(player.Job);
           console.log('[OverlayListener] Player job detected:', jobName, `(${player.Job})`);
           setPlayerJob(jobName);
+
+          // Load default opener for this job
+          const opener = openerService.getDefaultOpenerForJob(jobName);
+          if (opener) {
+            console.log('[OverlayListener] Loaded opener:', opener.name);
+            setCurrentOpener(opener);
+            setOpenerProgress(openerService.createProgress(opener));
+          }
         }
       }
     };
@@ -42,14 +58,12 @@ export function OverlayListener() {
     const handlePlayerChange = (data: ChangePrimaryPlayerEvent) => {
       console.log('[ACT Event] ChangePrimaryPlayer:', data);
       setPlayer(data.charID, data.charName);
-      // Fetch job info after player change
-      fetchPlayerJob();
+      void fetchPlayerJob();
     };
 
     // Listen for party changes (includes job info)
     const handlePartyChange = (data: PartyChangedEvent) => {
       console.log('[ACT Event] PartyChanged:', data);
-      // Find the current player in the party list
       const currentPlayerName = useOverlayStore.getState().playerName;
       if (currentPlayerName) {
         const playerInParty = data.party.find((member) => member.name === currentPlayerName);
@@ -65,36 +79,65 @@ export function OverlayListener() {
     const handleZoneChange = (data: ChangeZoneEvent) => {
       console.log('[ACT Event] ChangeZone:', data);
       setZone(data.zoneID, data.zoneName);
-      // Re-fetch job info on zone change
-      fetchPlayerJob();
+      void fetchPlayerJob();
     };
 
     // Listen for combat data updates
     const handleCombatData = (data: CombatDataEvent) => {
       const isActive = data.isActive === 'true';
-      const encounterTitle = data.Encounter?.title;
-
-      if (isActive !== useOverlayStore.getState().inCombat) {
-        console.log('[ACT Event] CombatData:', { isActive, encounterTitle });
-        setCombatState(isActive, encounterTitle);
-      }
+      setCombatState(isActive, data.Encounter?.title);
     };
 
     // Listen for log lines (action usage)
     const handleLogLine = (data: LogLineEvent) => {
-      // LogLine format: [timestamp, logType, ...data]
-      // We'll parse this more thoroughly in MS2
-      // For now, just log interesting lines
-      const logType = data.line[0];
+      const action = actionDetectionService.parseLogLine(data.line);
 
-      // Type 21 and 22 are typically ability usage lines
-      if (logType === '21' || logType === '22') {
-        console.log('[ACT Event] LogLine (Action):', data.line);
+      if (!action) return;
 
-        // Basic parsing: [timestamp, type, sourceId, sourceName, abilityId, abilityName, ...]
-        const abilityId = data.line[4] || 'unknown';
-        const abilityName = data.line[5] || 'unknown';
-        logAction(abilityName, abilityId);
+      // Filter to only player actions
+      const playerName = useOverlayStore.getState().playerName;
+      if (!playerName || action.sourceName !== playerName) {
+        return;
+      }
+
+      console.log('[ACT Event] Player Action:', action.abilityName, `(${action.abilityId})`);
+      logAction(action.abilityName, action.abilityId);
+
+      // Check if this matches the current opener progression
+      const state = useOverlayStore.getState();
+      const { currentOpener, openerProgress } = state;
+
+      if (currentOpener && openerProgress && !openerProgress.isComplete) {
+        const matches = openerService.matchesExpectedAction(
+          currentOpener,
+          openerProgress,
+          action.abilityId
+        );
+
+        if (matches) {
+          console.log(
+            '[Opener] ✓ Correct action:',
+            action.abilityName,
+            `(${openerProgress.currentIndex + 1}/${currentOpener.actions.length})`
+          );
+          const newProgress = openerService.advanceProgress(currentOpener, openerProgress);
+          setOpenerProgress(newProgress);
+
+          if (newProgress.isComplete) {
+            console.log('[Opener] Opener complete!');
+          }
+        } else {
+          const expectedAction = currentOpener.actions[openerProgress.currentIndex];
+          if (expectedAction) {
+            console.warn(
+              '[Opener] Wrong action! Expected:',
+              expectedAction.name,
+              `(${expectedAction.actionId}), Got:`,
+              action.abilityName,
+              `(${action.abilityId})`
+            );
+          }
+        }
       }
     };
 
@@ -109,7 +152,7 @@ export function OverlayListener() {
     overlayPluginService.startEvents();
 
     // Fetch initial job info
-    fetchPlayerJob();
+    void fetchPlayerJob();
 
     // Cleanup on unmount
     return () => {
@@ -120,7 +163,15 @@ export function OverlayListener() {
       overlayPluginService.removeEventListener('CombatData', handleCombatData);
       overlayPluginService.removeEventListener('LogLine', handleLogLine);
     };
-  }, [setPlayer, setPlayerJob, setZone, setCombatState, logAction]);
+  }, [
+    setPlayer,
+    setPlayerJob,
+    setZone,
+    setCombatState,
+    setCurrentOpener,
+    setOpenerProgress,
+    logAction,
+  ]);
 
   return null;
 }

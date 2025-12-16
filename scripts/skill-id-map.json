@@ -1,0 +1,18 @@
+{
+  "comment": "Maps FFXIV action IDs (hex) to ffxivrotations.com skill IDs",
+  "source": "Manual mapping from https://ffxivrotations.com and game data",
+  "mappings": {
+    "0000B1": 3574,
+    "004403": 199,
+    "00DF3": 3549,
+    "0002E6": 46,
+    "0009FB": 52,
+    "0001F5": 31,
+    "001D96": 12008,
+    "001CDD": 12010,
+    "001D97": 12007,
+    "000473": 12087,
+    "002665": 247,
+    "002667": 249
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "id": "war-standard-dt-71",
+  "job": "WAR",
+  "name": "Dawntrail Warrior Opener",
+  "version": "7.2",
+  "audioEnabled": true,
+  "notes": "Standard WAR opener for Dawntrail Patch 7.2 from The Balance.",
+  "source": "https://www.thebalanceffxiv.com/jobs/tanks/warrior/",
+  "actions": [
+    {
+      "id": "tomahawk-prepull",
+      "name": "Tomahawk",
+      "type": "gcd",
+      "position": 1,
+      "actionId": "0002E6",
+      "iconId": "000261",
+      "delayMs": -700
+    },
+    {
+      "id": "infuriate-prepull",
+      "name": "Infuriate",
+      "type": "ogcd",
+      "position": 1,
+      "weaveSlot": 1,
+      "actionId": "0009FB",
+      "iconId": "002555"
+    },
+    {
+      "id": "heavy-swing-1",
+      "name": "Heavy Swing",
+      "type": "gcd",
+      "position": 2,
+      "actionId": "0001F5",
+      "iconId": "000260"
+    },
+    {
+      "id": "maim-1",
+      "name": "Maim",
+      "type": "gcd",
+      "position": 3,
+      "actionId": "00025",
+      "iconId": "000255"
+    },
+    {
+      "id": "upheaval-1",
+      "name": "Upheaval",
+      "type": "ogcd",
+      "position": 3,
+      "weaveSlot": 1,
+      "actionId": "001D96",
+      "iconId": "002561"
+    },
+    {
+      "id": "storms-eye",
+      "name": "Storm's Eye",
+      "type": "gcd",
+      "position": 4,
+      "actionId": "0002D",
+      "iconId": "000264"
+    },
+    {
+      "id": "inner-release",
+      "name": "Inner Release",
+      "type": "ogcd",
+      "position": 4,
+      "weaveSlot": 1,
+      "actionId": "001CDD",
+      "iconId": "002564"
+    },
+    {
+      "id": "onslaught-1",
+      "name": "Onslaught",
+      "type": "ogcd",
+      "position": 4,
+      "weaveSlot": 2,
+      "actionId": "001D97",
+      "iconId": "002562"
+    },
+    {
+      "id": "inner-chaos-1",
+      "name": "Inner Chaos",
+      "type": "gcd",
+      "position": 5,
+      "actionId": "004403",
+      "iconId": "002568"
+    },
+    {
+      "id": "upheaval-2",
+      "name": "Upheaval",
+      "type": "ogcd",
+      "position": 5,
+      "weaveSlot": 1,
+      "actionId": "001D96",
+      "iconId": "002561"
+    },
+    {
+      "id": "fell-cleave-1",
+      "name": "Fell Cleave",
+      "type": "gcd",
+      "position": 6,
+      "actionId": "00DF3",
+      "iconId": "002557"
+    },
+    {
+      "id": "onslaught-2",
+      "name": "Onslaught",
+      "type": "ogcd",
+      "position": 6,
+      "weaveSlot": 1,
+      "actionId": "001D97",
+      "iconId": "002562"
+    },
+    {
+      "id": "fell-cleave-2",
+      "name": "Fell Cleave",
+      "type": "gcd",
+      "position": 7,
+      "actionId": "00DF3",
+      "iconId": "002557"
+    },
+    {
+      "id": "onslaught-3",
+      "name": "Onslaught",
+      "type": "ogcd",
+      "position": 7,
+      "weaveSlot": 1,
+      "actionId": "001D97",
+      "iconId": "002562"
+    },
+    {
+      "id": "fell-cleave-3",
+      "name": "Fell Cleave",
+      "type": "gcd",
+      "position": 8,
+      "actionId": "00DF3",
+      "iconId": "002557"
+    },
+    {
+      "id": "primal-wrath",
+      "name": "Primal Wrath",
+      "type": "ogcd",
+      "position": 8,
+      "weaveSlot": 1,
+      "actionId": "009C3B",
+      "iconId": "002570"
+    },
+    {
+      "id": "infuriate-2",
+      "name": "Infuriate",
+      "type": "ogcd",
+      "position": 8,
+      "weaveSlot": 2,
+      "actionId": "0009FB",
+      "iconId": "002555"
+    },
+    {
+      "id": "primal-rend",
+      "name": "Primal Rend",
+      "type": "gcd",
+      "position": 9,
+      "actionId": "009C39",
+      "iconId": "002566"
+    },
+    {
+      "id": "primal-ruination",
+      "name": "Primal Ruination",
+      "type": "gcd",
+      "position": 10,
+      "actionId": "009C3A",
+      "iconId": "002569"
+    },
+    {
+      "id": "inner-chaos-2",
+      "name": "Inner Chaos",
+      "type": "ogcd",
+      "position": 10,
+      "weaveSlot": 1,
+      "actionId": "004403",
+      "iconId": "002568"
+    },
+    {
+      "id": "heavy-swing-2",
+      "name": "Heavy Swing",
+      "type": "gcd",
+      "position": 11,
+      "actionId": "0001F5",
+      "iconId": "000260"
+    },
+    {
+      "id": "upheaval-3",
+      "name": "Upheaval",
+      "type": "ogcd",
+      "position": 11,
+      "weaveSlot": 1,
+      "actionId": "001D96",
+      "iconId": "002561"
+    },
+    {
+      "id": "maim-2",
+      "name": "Maim",
+      "type": "gcd",
+      "position": 12,
+      "actionId": "00025",
+      "iconId": "000255"
+    },
+    {
+      "id": "storms-path",
+      "name": "Storm's Path",
+      "type": "gcd",
+      "position": 13,
+      "actionId": "0002A",
+      "iconId": "000258"
+    },
+    {
+      "id": "fell-cleave-4",
+      "name": "Fell Cleave",
+      "type": "gcd",
+      "position": 14,
+      "actionId": "00DF3",
+      "iconId": "002557"
+    },
+    {
+      "id": "infuriate-3",
+      "name": "Infuriate",
+      "type": "ogcd",
+      "position": 14,
+      "weaveSlot": 1,
+      "actionId": "0009FB",
+      "iconId": "002555"
+    },
+    {
+      "id": "inner-chaos-3",
+      "name": "Inner Chaos",
+      "type": "gcd",
+      "position": 15,
+      "actionId": "004403",
+      "iconId": "002568"
+    }
+  ]
+}

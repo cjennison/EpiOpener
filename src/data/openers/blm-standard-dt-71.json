@@ -1,0 +1,161 @@
+{
+  "id": "blm-standard-dt-71",
+  "job": "BLM",
+  "name": "Standard Dawntrail 7.1 Opener",
+  "version": "7.1",
+  "audioEnabled": true,
+  "notes": "Standard BLM opener with Sharpcast weaving. Uses Paradox after Thunder.",
+  "source": "https://www.thebalanceffxiv.com/jobs/casters/black-mage/",
+  "actions": [
+    {
+      "id": "fire-3-prepull",
+      "name": "Fire III",
+      "type": "gcd",
+      "position": 1,
+      "actionId": "000099",
+      "iconId": "000453",
+      "delayMs": -3500
+    },
+    {
+      "id": "sharpcast",
+      "name": "Sharpcast",
+      "type": "ogcd",
+      "position": 1,
+      "weaveSlot": 1,
+      "actionId": "0000B1",
+      "iconId": "000467"
+    },
+    {
+      "id": "fire-4-1",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 2,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "triplecast",
+      "name": "Triplecast",
+      "type": "ogcd",
+      "position": 2,
+      "weaveSlot": 1,
+      "actionId": "0001D59",
+      "iconId": "000473"
+    },
+    {
+      "id": "fire-4-2",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 3,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "amplifier",
+      "name": "Amplifier",
+      "type": "ogcd",
+      "position": 3,
+      "weaveSlot": 1,
+      "actionId": "0006443",
+      "iconId": "002652"
+    },
+    {
+      "id": "fire-4-3",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 4,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "ley-lines",
+      "name": "Ley Lines",
+      "type": "ogcd",
+      "position": 4,
+      "weaveSlot": 1,
+      "actionId": "0000B2",
+      "iconId": "002668"
+    },
+    {
+      "id": "fire-4-4",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 5,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "paradox",
+      "name": "Paradox",
+      "type": "gcd",
+      "position": 6,
+      "actionId": "0006473",
+      "iconId": "002666"
+    },
+    {
+      "id": "fire-4-5",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 7,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "fire-4-6",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 8,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "despair",
+      "name": "Despair",
+      "type": "gcd",
+      "position": 9,
+      "actionId": "004122",
+      "iconId": "002665"
+    },
+    {
+      "id": "manafont",
+      "name": "Manafont",
+      "type": "ogcd",
+      "position": 9,
+      "weaveSlot": 1,
+      "actionId": "0000AC",
+      "iconId": "000469"
+    },
+    {
+      "id": "fire-4-7",
+      "name": "Fire IV",
+      "type": "gcd",
+      "position": 10,
+      "actionId": "0000B5",
+      "iconId": "002653"
+    },
+    {
+      "id": "despair-2",
+      "name": "Despair",
+      "type": "gcd",
+      "position": 11,
+      "actionId": "004122",
+      "iconId": "002665"
+    },
+    {
+      "id": "blizzard-3",
+      "name": "Blizzard III",
+      "type": "gcd",
+      "position": 12,
+      "actionId": "00009A",
+      "iconId": "000454"
+    },
+    {
+      "id": "xenoglossy",
+      "name": "Xenoglossy",
+      "type": "gcd",
+      "position": 13,
+      "actionId": "004118",
+      "iconId": "002667"
+    }
+  ]
+}
