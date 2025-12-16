@@ -28,3 +28,8 @@ https://www.thebalanceffxiv.com/img/jobs/war/warrior-dawntrail-opener-updated-2.
 - The overlay must be easily maintainable and extensible for future updates and additional features.
 - The overlay must support a custom data model in JSON for writing an opener including action names, timings, audio cues, and visual assets via key IDs. It should include instructions for providing an AI with an image and asking it to write the opener JSON data model for any class and situation.
 - The overlay must support localization for multiple languages.
+- User Preferences and settings must be stored in local storage to persist across sessions.
+
+## Usage
+
+The application will be hosted via a local web server during development and be hosted on Vercel for production use. Users will add the overlay to ACT by specifying the URL of the hosted overlay in ACT's Custom Overlay settings.
