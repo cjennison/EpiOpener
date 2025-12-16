@@ -50,6 +50,24 @@ export interface OnlineStatusChangedEvent {
   status: string;
 }
 
+export interface Combatant {
+  ID: number;
+  Name: string;
+  Job: number;
+  Level: number;
+  CurrentHP: number;
+  MaxHP: number;
+  CurrentMP: number;
+  MaxMP: number;
+  PosX: number;
+  PosY: number;
+  PosZ: number;
+}
+
+export interface GetCombatantsResponse {
+  combatants: Combatant[];
+}
+
 export type OverlayEvent =
   | ChangePrimaryPlayerEvent
   | ChangeZoneEvent
